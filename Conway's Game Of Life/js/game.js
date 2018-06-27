@@ -9,6 +9,7 @@ var Game = {
     Game.next = document.getElementById('next');
     Game.play = document.getElementById('play')
   },
+
   start: function() {
     for (var i = 0; i < Game.cells.length; i++) {
       Game.cells[i].onclick = Cell.toggle;
@@ -16,6 +17,7 @@ var Game = {
     Game.next.onclick = Board.nextStep;
     Game.play.onclick = Game.update;
   },
+  
   update: function() {
     setInterval(Board.nextStep,1000);
   }

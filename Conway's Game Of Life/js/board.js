@@ -4,13 +4,16 @@ var Board = {
   getBoard: function() {
     return document.getElementsByClassName('board')[0];
   },
+
   getCells: function() {
     var board = Board.getBoard();
     return board.getElementsByTagName('li');
   },
+
   getAliveCells : function() {
     return document.getElementsByClassName('alive');
   },
+
   createCells: function() {
     var board = Board.getBoard();
     var html = '';
@@ -19,6 +22,7 @@ var Board = {
     }
     board.innerHTML = html;
   },
+
   updateCells: function(boardJS) {
     var board = Board.getBoard();
     var html = '';
@@ -33,12 +37,12 @@ var Board = {
     }
     board.innerHTML = html;
   },
+
   nextStep: function() {
     var boardHTML = Board.getCells();
     var currentBoard = GameOfLife.getBoardFromHTML(boardHTML, Board.columns);
     var newBoard = GameOfLife.createEmptyBoard(Board.rows,Board.columns)
     GameOfLife.getNextStep(currentBoard,newBoard);
     Board.updateCells(newBoard);
-    console.log(newBoard);
   }
 }

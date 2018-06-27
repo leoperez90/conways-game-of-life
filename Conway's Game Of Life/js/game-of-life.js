@@ -10,6 +10,7 @@ var GameOfLife = {
     }
     return newBoard;
   },
+
   getBoardFromHTML: function(cells, cols) {
     var board = [];
     var row = [];
@@ -24,6 +25,7 @@ var GameOfLife = {
     }
     return board;
   },
+
   getNextStep: function(a, b) {
     for (var i = 0; i < a.length; i++) {
       var row = a[i];
@@ -36,6 +38,7 @@ var GameOfLife = {
       }
     }
   },
+
   applyRule: function(board, posX, posY) {
   var cell = board[posX][posY];
   var count = 0;
