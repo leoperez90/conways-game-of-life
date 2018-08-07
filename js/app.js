@@ -10,4 +10,7 @@ var init = function() {
   Game.start();
 }
 
+var stop = function() {
+Game.stopfunc(); 
+}
 window.onload = init;
