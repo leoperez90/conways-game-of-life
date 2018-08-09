@@ -2,6 +2,7 @@ var Game = {
   next: null,
   board: null,
   cells: null,
+  reset: null,
   play: null,
   stop: null,
   interval: null,
@@ -11,10 +12,12 @@ var Game = {
     Game.board = Board.getBoard();
     Game.cells = Board.getCells();
     Game.next = document.getElementById('next');
+    Game.reset = document.getElementById('reset');
     Game.play = document.getElementById('play');
     Game.stop = document.getElementById('stop');
     Game.stop.disabled = true;
-
+    Game.save = document.getElementById("save");
+    Game.load = document.getElementById("load");
   },
 
   start: function() {
@@ -24,9 +27,12 @@ var Game = {
     Game.next.onclick = Board.nextStep;
     Game.play.onclick = Game.update;
     Game.stop.onclick = Game.stopfunc;
+    Game.reset.onclick = Game.resete;
     Game.board5.onclick = Game.boardx5;
     Game.board10.onclick = Game.boardx10;
-    Game.board20.onclick = Game.boardx20;
+    Game.board15.onclick = Game.boardx15;
+    Game.save.onclick = Game.savefunc;
+    Game.load.onclick = Game.loadfunc;
   },
 
   update: function() {
@@ -35,7 +41,7 @@ var Game = {
     Game.stop.disabled = false;
     Game.board5.disabled = false;
     Game.board10.disabled = false;
-    Game.board20.disabled = false;
+    Game.board15.disabled = false;
   },
 
   stopfunc: function() {
@@ -53,7 +59,7 @@ var Game = {
     Game.stop.disabled = false;
     Game.board5.disabled = true;
     Game.board10.disabled = false;
-    Game.board20.disabled = false;
+    Game.board15.disabled = false;
 
   },
 
@@ -66,10 +72,10 @@ var Game = {
     Game.stop.disabled = false;
     Game.board5.disabled = false;
     Game.board10.disabled = true;
-    Game.board20.disabled = false;
+    Game.board15.disabled = false;
   },
 
-  boardx20: function() {
+  boardx15: function() {
     Board.rows = 15;
     Board.columns = 15;
     Game.init();
@@ -78,6 +84,43 @@ var Game = {
     Game.stop.disabled = false;
     Game.board5.disabled = false;
     Game.board10.disabled = false;
-    Game.board20.disabled = true;
+    Game.board15.disabled = true;
+    Game.load.onclick = Game.loadfunc;
+    Game.save.onclick = Game.savefunc;
+  },
+  resete: function() {
+    Game.init();
+    Game.start();
+  },
+
+  savefunc: function()
+  {
+    if(Game.stop.disabled == true)
+    {
+      localStorage.setItem("game", document.getElementsByClassName('game')[0].innerHTML);
+      localStorage.setItem("columns", Board.columns);
+      alert("Game saved.");
+    }
+    else {
+      alert("You cannot save a game that haven't even started.");
+    }
+  },
+
+  loadfunc: function()
+  {
+    if(Game.stop.disabled == true)
+    {
+      if(localStorage.getItem("game") == null)
+      {
+        alert("Save a game first to load a saved one.");
+      }
+      else {
+        document.getElementsByClassName('game')[0].innerHTML = localStorage.getItem("game");
+        Board.columns = localStorage.getItem("columns");
+        Board.rows = Board.columns;
+        alert("Game loaded.");
+      }
+    }
   }
+
 };
