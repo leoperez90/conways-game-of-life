@@ -38,6 +38,14 @@ var Board = {
     board.innerHTML = html;
   },
 
+  dynamicBoard: function()
+  {
+    var board = Board.getBoard();
+    board.style.height = Board.rows*36 + 'px';
+    board.style.width = Board.rows*36 + 'px';
+
+  },
+
   nextStep: function() {
     var boardHTML = Board.getCells();
     var currentBoard = GameOfLife.getBoardFromHTML(boardHTML, Board.columns);
